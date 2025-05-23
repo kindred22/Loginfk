@@ -1,0 +1,35 @@
+.noUi-tooltip {
+	display: block;
+	position: relative;
+	border: 1px solid #92A8C0;
+	border-radius: 3px;
+	background: #fff;
+	color: #000;
+	padding: 5px;
+	text-align: center;
+	min-width:100px;
+}
+.noUi-tooltip:after{
+	position:absolute;
+	content:"";
+	width: 0; 
+	height: 0; 
+	border-left: 10px solid transparent; 
+	border-right: 10px solid transparent; 
+	border-top: 10px solid #92A8C0;
+	bottom:-10px;
+	left:40px;
+	
+}
+.noUi-horizontal .noUi-tooltip {
+-webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    bottom: 45px;
+    left: 5px;
+}
+.noUi-vertical .noUi-tooltip {
+-webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    top: 50%;
+    right: 120%;
+}

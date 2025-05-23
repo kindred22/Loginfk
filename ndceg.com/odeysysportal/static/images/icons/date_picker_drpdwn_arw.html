@@ -1,0 +1,1217 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0" />
+<script src="/odeysysportal/static/js/core/jquery-2.0.3.min.js"></script>
+<script src="/odeysysportal/static/js/core/jquery-ui.min.js"></script>
+<link href="/odeysysportal/static/css/flight/RangeSlidercss.css" rel="stylesheet">
+<link href="/odeysysportal/static/css/commonDev.css" rel="stylesheet">
+<!--------------------------------------- Favicon Icon ----------------------------------------------------->
+<link rel="shortcut icon" href="/odeysysportal/static/images/icons/favicon.ico" type="image/x-icon" />
+<title>NDC</title>
+</head>
+<body data-ng-app="app" style="padding-right:0px !important;" data-ng-cloak>
+	
+		
+			<script src="/odeysysportal/static/js/core/lodash.js"></script>
+			<script src="/odeysysportal/static/js/angular.js"></script>
+			<script src="https://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyDPji3mgFwiCFtdIDrSlwKZRktnKEy_9jM&Signature=clGLYKFw8OCsfE7v_Mhw5Q9-Gq4=&sensor=false&libraries=places"></script>
+			<script src="/odeysysportal/static/js/ui-bootstrap-0.11.0.min.js"></script>
+			<script src="/odeysysportal/static/js/ui-bootstrap-tpls-0.11.0.min.js"></script>
+			<script src="/odeysysportal/static/js/angular-simple-logger.js"></script>
+			<script src="/odeysysportal/static/js/angular-google-maps.js"></script>
+			<script src="/odeysysportal/static/js/core/swiper.js"></script>
+			<script src="/odeysysportal/static/js/core/angular-swiper.js"></script>
+			<script src="/odeysysportal/static/js/core/ng-infinite-scroll.js"></script>
+			<script src="/odeysysportal/static/js/core/app.js?n=1"></script>
+			<script src="/odeysysportal/static/js/core/angular.rangeSlider.js"></script>
+			<script src="/odeysysportal/static/js/core/angular-messages.min.js"></script>
+			<script src="/odeysysportal/static/js/core/md5.js"></script>
+			<script src="/odeysysportal/static/js/core/googleTranslateHelper.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.10/d3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-knob/0.1.3/ng-knob.min.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>-->
+	
+	<script
+	src="/odeysysportal/static/js/vendor/Chart.min.new.js"></script>
+	
+	<script
+	src="/odeysysportal/static/js/vendor/angular-chart.min.new.js"></script>
+	
+	
+			
+			<div id="chklogin">
+				<header class="main">
+						
+
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<script type="application/javascript" src="/odeysysportal/static/js/header/headerScript.js"></script>
+<script type="application/javascript" src="/odeysysportal/static/js/config/Production.env.js"></script>
+<script type="text/javascript" src="https://sealserver.trustwave.com/seal.js?code=04bee9f0c1514e67839da32078eecbc2"></script>
+<script>
+var conPath = '/odeysysportal'; 
+function setViewCurrency(){
+	
+	var viewCurrencyCodeUI=$("#viewCurrency option:selected").text();
+	var viewCurrencyIDUI=$("#viewCurrency").val();
+	var agencyCurrencyUI=$("#agencyCurrency").val();
+	
+	if(agencyCurrencyId=="" || agencyCurrencyId=="0"){
+	$('#viewCurrency option').each(function() {
+		if(this.text==agencyCurrencyUI){
+			agencyCurrencyId=this.value;
+		}
+	});
+	}
+ 
+	var url = '../login/getViewCurrencyRate?viewCurrencyCode='+viewCurrencyCodeUI+'&viewCurrencyID='+viewCurrencyIDUI+'&agencyCurrency='+agencyCurrencyId;
+ 	$.ajax({url: url, success: function(result){
+ 		
+ 		if(result==""){
+ 			if(viewCurrencyID==""){
+ 	 	    $("#viewCurrency").val("-1");
+ 			}else{
+ 				 $("#viewCurrency").val(viewCurrencyID);
+ 			}
+ 			alert("currency rate not found.");
+ 		}else{
+ 			location.reload();
+ 		}
+ 	}});
+	
+}
+// $(window).unload(function()
+// {
+//    	var url = '../checkIfValid/ValidateUser?t='+new Date();
+//  	$.ajax({url: url, success: function(result){
+// 	  	if(result == 1){
+// 	  		window.location.href = conPath+'/login/loginForm';
+// 	  	}
+//  	}});
+// });
+decimalCount = '2';
+roundUpStatus = '0';
+viewCurrencyRate = '1.0';
+viewCurrencyID = '';
+viewCurrencyCode='AED';
+agencyCurrencyId='';
+</script>
+
+<style>
+#loading{
+ position:fixed;
+ top:0;
+ left:0;
+ right:0;
+ bottom:0;
+ background-color: white;
+ color: black;
+ opacity: 1;
+ transition: 0.5s;
+ visibility: visible;
+ z-index:100000000000000000000;
+ text-align:center;
+	padding-top:10%;
+}
+#loading.hidden{
+ opacity: 0;
+ visibility: hidden;
+}
+.headwhite{
+	height: 78px;
+}
+.wrapper, .container {
+    margin: 0 auto;
+    /* width: 1300px; */
+    width: 1200px;
+    position: relative;
+    padding: 0;
+}
+.green-head {
+    background-color: #032759;
+}
+header.main {
+  background-color: transparent !important;
+}
+.notify-sec,
+header.main .menuBar ul li {
+  border-right: 2pt solid #022859 !important;
+  border-left: 2pt solid #022859 !important;
+  border-top: 3pt solid #022859 !important;
+}
+.notify-sec {
+  height: 58px !important;
+}
+
+#trustwaveSealImage{
+	cursor: pointer;
+    position: fixed;
+    bottom: 0;
+    margin: 15px;
+    left: 0;
+}
+</style>
+<script>
+setTimeout(function() {
+ $('#loading').addClass('hidden');
+}, 1000);
+</script>
+
+<div id="loading">
+
+</div>
+<div data-ng-controller="headerCtrl" class="main" >
+<div class="row headwhite">
+	<div class="wrapper menu">
+		<div class="col-md-2 col" id="logo">
+			<a href="/odeysysportal/dashboard/dashboardHome">
+			 <img src="../static/images/logo-new.png" alt="logo" /> 
+			</a>
+		</div>
+		
+		
+		<div class="col-md-5 col" id="contact-info">
+			<ul class="list-inline">
+				
+				
+				<li>
+					<div class="">
+					
+					
+					
+					<select class="select_arrow droparrow" style="width:112%;font-size:12px;" id="viewCurrency" onChange="setViewCurrency()">
+					 <option value="-1">view currency</option>
+					
+																			
+<option value="96">MMK</option>
+
+																			
+<option value="103">MXN</option>
+
+																			
+<option value="82">KWD</option>
+
+																			
+<option value="173">GRD</option>
+
+																			
+<option value="123">SAR</option>
+
+																			
+<option value="128">SGD</option>
+
+																			
+<option value="207">TYU</option>
+
+																			
+<option value="66">HUF</option>
+
+																			
+<option value="3">XCD</option>
+
+																			
+<option value="120">RON</option>
+
+																			
+<option value="113">PEN</option>
+
+																			
+<option value="114">PGK</option>
+
+																			
+<option value="16">BDT</option>
+
+																			
+<option value="78">KHR</option>
+
+																			
+<option value="12">AWG</option>
+
+																			
+<option value="178">ITL</option>
+
+																			
+<option value="18">BGN</option>
+
+																			
+<option value="189">PEI</option>
+
+																			
+<option value="15">BBD</option>
+
+																			
+<option value="198">TPE</option>
+
+																			
+<option value="156">ZMK</option>
+
+																			
+<option value="50">ERN</option>
+
+																			
+<option value="166">CLF</option>
+
+																			
+<option value="69">INR</option>
+
+																			
+<option value="74">JOD</option>
+
+																			
+<option value="42">CVE</option>
+
+																			
+<option value="136">SZL</option>
+
+																			
+<option value="192">PTE</option>
+
+																			
+<option value="8">ARS</option>
+
+																			
+<option value="108">NGN</option>
+
+																			
+<option value="115">PHP</option>
+
+																			
+<option value="51">ETB</option>
+
+																			
+<option value="172">GQE</option>
+
+																			
+<option value="149">UZS</option>
+
+																			
+<option value="93">MDL</option>
+
+																			
+<option value="152">VUV</option>
+
+																			
+<option value="111">OMR</option>
+
+																			
+<option value="24">BRL</option>
+
+																			
+<option value="23">BOB</option>
+
+																			
+<option value="110">NPR</option>
+
+																			
+<option value="147">UGX</option>
+
+																			
+<option value="138">TJS</option>
+
+																			
+<option value="87">LKR</option>
+
+																			
+<option value="13">AZN</option>
+
+																			
+<option value="35">NZD</option>
+
+																			
+<option value="210">NR</option>
+
+																			
+<option value="109">NIO</option>
+
+																			
+<option value="129">SHP</option>
+
+																			
+<option value="183">MTL</option>
+
+																			
+<option value="203">TEEE</option>
+
+																			
+<option value="146">UAH</option>
+
+																			
+<option value="47">DZD</option>
+
+																			
+<option value="5">AMD</option>
+
+																			
+<option value="85">LAK</option>
+
+																			
+<option value="158">ARA</option>
+
+																			
+<option value="159">ARP</option>
+
+																			
+<option value="31">CAD</option>
+
+																			
+<option value="32">CDF</option>
+
+																			
+<option value="45">DKK</option>
+
+																			
+<option value="84">KZT</option>
+
+																			
+<option value="162">BOP</option>
+
+																			
+<option value="155">ZAR</option>
+
+																			
+<option value="160">AZM</option>
+
+																			
+<option value="62">HKD</option>
+
+																			
+<option value="190">PES</option>
+
+																			
+<option value="130">SLL</option>
+
+																			
+<option value="41">CUP</option>
+
+																			
+<option value="60">GTQ</option>
+
+																			
+<option value="20">BIF</option>
+
+																			
+<option value="80">KPW</option>
+
+																			
+<option value="99">MRO</option>
+
+																			
+<option value="53">FKP</option>
+
+																			
+<option value="150">VEF</option>
+
+																			
+<option value="102">MWK</option>
+
+																			
+<option value="193">ROL</option>
+
+																			
+<option value="44">DJF</option>
+
+																			
+<option value="27">NOK</option>
+
+																			
+<option value="205">AMIT</option>
+
+																			
+<option value="112">PAB</option>
+
+																			
+<option value="75">JPY</option>
+
+																			
+<option value="88">LRD</option>
+
+																			
+<option value="188">NLG</option>
+
+																			
+<option value="92">LYD</option>
+
+																			
+<option value="126">SDG</option>
+
+																			
+<option value="98">MOP</option>
+
+																			
+<option value="36">CLP</option>
+
+																			
+<option value="168">ECS</option>
+
+																			
+<option value="154">YER</option>
+
+																			
+<option value="97">MNT</option>
+
+																			
+<option value="2">AFN</option>
+
+																			
+<option value="64">HRK</option>
+
+																			
+<option value="73">JMD</option>
+
+																			
+<option value="29">BYR</option>
+
+																			
+<option value="37">CNY</option>
+
+																			
+<option value="26">BTN</option>
+
+																			
+<option value="211">ABD</option>
+
+																			
+<option value="204">VIM</option>
+
+																			
+<option value="185">MXP</option>
+
+																			
+<option value="175">HRD</option>
+
+																			
+<option value="181">MGF</option>
+
+																			
+<option value="212">ALI</option>
+
+																			
+<option value="140">TND</option>
+
+																			
+<option value="202">GGF</option>
+
+																			
+<option value="67">IDR</option>
+
+																			
+<option value="161">BGL</option>
+
+																			
+<option value="116">PKR</option>
+
+																			
+<option value="30">BZD</option>
+
+																			
+<option value="134">STD</option>
+
+																			
+<option value="148">UYU</option>
+
+																			
+<option value="1">AED</option>
+
+																			
+<option value="101">MVR</option>
+
+																			
+<option value="125">SCR</option>
+
+																			
+<option value="94">MGA</option>
+
+																			
+<option value="100">MUR</option>
+
+																			
+<option value="70">IQD</option>
+
+																			
+<option value="7">AOA</option>
+
+																			
+<option value="164">CDZ</option>
+
+																			
+<option value="72">ISK</option>
+
+																			
+<option value="34">CHF</option>
+
+																			
+<option value="174">GWP</option>
+
+																			
+<option value="89">LSL</option>
+
+																			
+<option value="186">MZM</option>
+
+																			
+<option value="33">XAF</option>
+
+																			
+<option value="141">TOP</option>
+
+																			
+<option value="176">IEP</option>
+
+																			
+<option value="119">QAR</option>
+
+																			
+<option value="171">GNS</option>
+
+																			
+<option value="28">BWP</option>
+
+																			
+<option value="65">HTG</option>
+
+																			
+<option value="106">NAD</option>
+
+																			
+<option value="169">EEK</option>
+
+																			
+<option value="197">TMM</option>
+
+																			
+<option value="56">GHS</option>
+
+																			
+<option value="157">ZWL</option>
+
+																			
+<option value="40">RSD</option>
+
+																			
+<option value="117">PLN</option>
+
+																			
+<option value="105">MZN</option>
+
+																			
+<option value="91">LVL</option>
+
+																			
+<option value="135">SYP</option>
+
+																			
+<option value="22">BND</option>
+
+																			
+<option value="6">ANG</option>
+
+																			
+<option value="68">ILS</option>
+
+																			
+<option value="48">EGP</option>
+
+																			
+<option value="142">TRY</option>
+
+																			
+<option value="206">QWER</option>
+
+																			
+<option value="179">LSM</option>
+
+																			
+<option value="208">ASD</option>
+
+																			
+<option value="81">KRW</option>
+
+																			
+<option value="9">USD</option>
+
+																			
+<option value="57">GIP</option>
+
+																			
+<option value="133">SSP</option>
+
+																			
+<option value="76">KES</option>
+
+																			
+<option value="79">KMF</option>
+
+																			
+<option value="195">SUR</option>
+
+																			
+<option value="17">XOF</option>
+
+																			
+<option value="25">BSD</option>
+
+																			
+<option value="77">KGS</option>
+
+																			
+<option value="107">XPF</option>
+
+																			
+<option value="127">SEK</option>
+
+																			
+<option value="167">CSD</option>
+
+																			
+<option value="132">SRD</option>
+
+																			
+<option value="194">SRG</option>
+
+																			
+<option value="196">TJR</option>
+
+																			
+<option value="184">MTP</option>
+
+																			
+<option value="153">WST</option>
+
+																			
+<option value="43">CZK</option>
+
+																			
+<option value="143">TTD</option>
+
+																			
+<option value="90">LTL</option>
+
+																			
+<option value="180">LUF</option>
+
+																			
+<option value="200">MRU</option>
+
+																			
+<option value="201">ZWD</option>
+
+																			
+<option value="14">BAM</option>
+
+																			
+<option value="209">KALIN</option>
+
+																			
+<option value="177">INR1</option>
+
+																			
+<option value="54">GBP</option>
+
+																			
+<option value="86">LBP</option>
+
+																			
+<option value="163">BRC</option>
+
+																			
+<option value="187">NIC</option>
+
+																			
+<option value="170">GHC</option>
+
+																			
+<option value="46">DOP</option>
+
+																			
+<option value="199">ZMW</option>
+
+																			
+<option value="104">MYR</option>
+
+																			
+<option value="118">PYG</option>
+
+																			
+<option value="11">AUD</option>
+
+																			
+<option value="4">ALL</option>
+
+																			
+<option value="121">RUB</option>
+
+																			
+<option value="52">FJD</option>
+
+																			
+<option value="131">SOS</option>
+
+																			
+<option value="139">TMT</option>
+
+																			
+<option value="191">PLZ</option>
+
+																			
+<option value="10">EUR</option>
+
+																			
+<option value="122">RWF</option>
+
+																			
+<option value="59">GNF</option>
+
+																			
+<option value="151">VND</option>
+
+																			
+<option value="49">MAD</option>
+
+																			
+<option value="145">TZS</option>
+
+																			
+<option value="71">IRR</option>
+
+																			
+<option value="83">KYD</option>
+
+																			
+<option value="124">SBD</option>
+
+																			
+<option value="144">TWD</option>
+
+																			
+<option value="61">GYD</option>
+
+																			
+<option value="21">BMD</option>
+
+																			
+<option value="39">CRC</option>
+
+																			
+<option value="38">COP</option>
+
+																			
+<option value="63">HNL</option>
+
+																			
+<option value="19">BHD</option>
+
+																			
+<option value="137">THB</option>
+
+																			
+<option value="55">GEL</option>
+
+																			
+<option value="95">MKD</option>
+
+																			
+<option value="58">GMD</option>
+
+																			
+<option value="182">MLF</option>
+
+															</select>
+														
+						
+						
+						
+					</div>
+					<!-- select_arrow -->
+				</li>
+				
+				
+				<li class="phone">
+					<img src="/odeysysportal/static/images/icons/header/mob_no.png" alt="phone-icon" />
+					<span data-ng-if="phoneNo != null && phoneNo!=''">{{phoneNo}}</span>
+					<span data-ng-if="phoneNo == null || phoneNo==''">N/A</span>
+				</li>
+				<li class="mail">
+					<img src="/odeysysportal/static/images/icons/header/email_icon.png" alt="mail-icon" />
+					<span> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aacbc0c4c3c2cbde84c2eacdc7cbc3c684c9c5c7">[email&#160;protected]</a></span>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-5 col" id="user-info">
+		
+			<ul class="list-inline">
+			
+			  
+				
+				<li class="currency">
+					<p>{{loggedAgency[0][20]}}</p>
+					<input type="hidden" id="agencyCurrency" value="{{loggedAgency[0][20]}}">
+				</li>
+				
+				
+				<li>
+					<div class="">
+						<select class="select_arrow droparrow">
+							<option value="eng">English</option>
+						</select>
+					</div>
+					<!-- select_arrow -->
+				</li>
+				
+				 
+				<li>
+				
+					<span>
+						Welcome
+						  
+						 
+						  
+					        
+					        	hossam khalifa  
+					         
+						
+						<!-- need to right side this image according to USER LOGIN ICON IT SHOULD BE SHOW AFTER AGENT NAME NTTO-219 -->
+					<img src="/odeysysportal/static/images/icons/header/user_icon.png" alt="user-icon" />
+					</span>
+					<span style="margin-left:10px;">
+						 <a style="color:#105AA5;" href="../login/signOut">Sign Out</a>
+					</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- wrapper-->
+</div>
+<!-- row -->
+
+<!-- <div class="newsFeed"> -->
+  
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script
+  type="text/javascript"
+  src="/odeysysportal/static/js/newsFeed/newsFeed.js"
+></script>
+<!-- News Letter -->
+<div ng-controller="newsFeed">
+  <div class="news green-head" ng-if="feeds.length">
+    <div
+      id="carousel-news"
+      class="carousel slide wrapper"
+      data-interval="{{sliderTimer}}"
+      data-ride="carousel"
+    >
+      <!-- Indicators -->
+      <!--  <ol class="carousel-indicators">
+  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+  <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+  <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+</ol> -->
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div
+          class="item"
+          ng-style="{ 'font-size': fontSize + 'px'}"
+          ng-repeat="feed in feeds"
+          ng-class="{ active: $index == 0 }"
+        >
+          <!-- <div class="carousel-caption">
+      {{ feed.attributes.Feed }}
+    </div> -->
+          <ng-container ng-if="!feed.attributes.Link">{{ feed.attributes.Feed }}</ng-container>
+          <a href="feed.attributes.Link" target="_blank" ng-if="feed.attributes.Link">{{ feed.attributes.Feed }}</a>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <ng-container ng-if="feeds.length > 1">
+	      <a
+	        class="left carousel-control"
+	        href="#carousel-news"
+	        role="button"
+	        data-slide="prev"
+	        ng-non-bindable
+	      >
+	        <img src="../static/images/icons/left_arrow_black.png" />
+	        <span class="sr-only">Previous</span>
+	      </a>
+	      <a
+	        class="right carousel-control"
+	        href="#carousel-news"
+	        role="button"
+	        data-slide="next"
+	        ng-non-bindable
+	      >
+	        <img src="../static/images/icons/right_arrow_black.png" />
+	        <span class="sr-only">Next</span>
+	      </a>
+      </ng-container>
+    </div>
+
+    <!-- <ul>
+  <li ng-repeat="feed in feeds">
+    {{ feed.attributes.Feed }}
+  </li>
+</ul> -->
+  </div>
+</div>
+<!-- News Letter -->
+
+<style>
+  .news {
+    border-bottom: 2px solid white;
+    text-align: center;
+    padding: 10px;
+    color: white;
+  }
+  /* .news .item {
+  	font-size: 17px !important;
+  } */
+  .news .item a {
+  	color: white;
+    text-decoration: underline white;
+  }
+  .news .left {
+    margin-bottom: 0px !important;
+  }
+  .news .active {
+    background-color: transparent !important;
+  }
+  .news .carousel-control {
+    background: transparent !important;
+    display: flex;
+    opacity: 1 !important;
+  }
+  .news .carousel-control img {
+    background-color: white;
+    border-radius: 50%;
+  }
+  .news .carousel-control.left {
+    justify-content: start;
+  }
+  .news .carousel-control.right {
+    justify-content: end;
+  }
+</style>
+
+<!-- </div> -->
+
+
+<div class="spacing menuBar" id="menuBarHeader">
+	<div class="text-right wrapper">
+	<div class="dash-menu">
+					<div class="notify-sec">
+						<div class="col-md-2">
+							<span class="speedometer"><img
+								src="../static/images/icons/speedometer.png"></span>
+						</div>
+
+						<div class="col-md-5 low-bal-text">
+							<span class="red-text"><span>Low Balance</span></span>
+						</div>
+						<!-- <div class="col-md-3">
+										
+										</div> -->
+
+						<div class="col-md-3">
+							<div class="notification" style="margin-right: 13px;">
+								<img src="../static/images/icons/notify-new.png"> <span
+									class="badge-new badge-primary">20</span>
+							</div>
+						</div>
+						<div class="col-md-2 setting-icon"><!--  style="margin-right: 0px;top: 0px;margin-left: -6px;" -->
+							<a href="../dashboard/agentSetting?menu=setting"> <img
+								src="../static/images/icons/setting-new.png" style="margin-right: 12px;top: 0px;margin-left: -6px;"></a>
+						</div>
+						<!-- <ul>
+											<li class="speedometer"><img src="images/icons/speedometer.png"></li>
+											<li class="red-text"> <span>Low <br> </span> <span> Balance</span></li>
+											<li><img src="images/icons/setting-new.png"></li>
+											<li class="notification">
+												<span class="badge-new badge-primary">20</span>
+												<img src="images/icons/notify-new.png"></li>
+										</ul> -->
+						<div class="clearfix"></div>
+					</div>
+				</div>
+							<div class="dash-modules">
+						<ul  class="list-inline homeIcons menubg"  style="text-align: left; margin-left:1em">  <!-- margin-left:{{cssVal}}em -->
+							<li id="dashboard" class="active" title="Home">
+								<a href="/odeysysportal/dashboard/dashboardHome"><img src="../static/images/icons/header/home_icon.png" alt="home-icon" title="Home"/></a>
+							</li>
+							
+								<li id="flight" data-ng-if="ifExistProduct('1');" title="Flight">
+									<a href="/odeysysportal/flight/flightWidget">
+										<img src="../static/images/icons/header/Flight_greenicon.png" alt="flight-icon" title="Flight" />
+									</a>
+								</li>
+							
+							<li id="hotel" data-ng-if="ifExistProduct('222222222222222');" title="Hotels">
+							<a href="/odeysysportal/hotel/hotelWidget"><img src="../static/images/icons/header/building_icon.png" alt="hotel-icon" alt="Hotels" title="Hotels" /></a>
+							</li>
+							<li id="car" data-ng-if="ifExistProduct('33333333');" title="Car">
+								<a href="/odeysysportal/car/carWidget"><img src="../static/images/icons/header/car_icon.png" alt="car-icon" title="Car" /></a>
+							</li>
+							<!-- <li id="flightHotel" data-ng-if="ifExistProduct('1_2');" title="Flight Hotels">
+								<a href="/odeysysportal/flightHotel/flightHotelWidget"><img src="../static/images/icons/header/flight_building_icon.png" alt="flight-hotel-icon" title="Flight-Hotel" /></a>
+							</li> -->
+							<li id="packages" data-ng-if="ifExistProduct('5');" title="Packages">
+								<a href="/odeysysportal/packages/packagesWidget"><img src="../static/images/icons/header/box_icon.png" alt="packages-icon" title="Packages" /></a>
+							</li>
+							<li id="meetGreet" data-ng-if="ifExistProduct('7');">
+								<a href="/odeysysportal/meetGreet/meetGreetWidget"><img class="meetGreet-icon" src="../static/images/icons/header/meeting-blue-icon.png" alt="meet-greet-icon"></a>
+							</li>
+							<li id="activities" data-ng-if="ifExistProduct('6');"  title="Activities" >
+								<a href="/odeysysportal/activities/activitiesWidget"><img class="visa-icon" src="../static/images/icons/header/activities.png" alt="activities-icon" title="Activities"></a>
+							</li>
+							<li id="visa" data-ng-if="ifExistProduct('8');" title="Visa">
+								<a href="/odeysysportal/visa/visaWidget"><img class="visa-icon" src="../static/images/icons/header/visa.png" alt="visa-icon" alt="Visa" /></a>
+							</li> 
+							<li id="insurance" data-ng-if="ifExistProduct('44444');" title="Insurance">
+								<a href="/odeysysportal/insurance/insuranceWidget"><img src="../static/images/icons/header/hand_heart_icon.png" alt="hand_heart_icon-icon" title="Insurance" /></a>
+							</li>
+						</ul>	<!-- list-inline homeIcons -->
+					</div>
+					<div class="clearfix"> </div>
+				
+		
+		<!-- list-inline homeIcons -->
+	</div>
+	<!-- text-right -->
+</div>
+<!-- spacing menuBar -->
+</div>
+<script>
+userSessionScope = escapeSpecialChars('[[19573,"AJNIHAT ALWALID TRAVEL AND TOURISM L.L.C",3931,"Dubai",1759,"","AGN18836:ajnihat.h@gmail.com"," ",null,"AGN18836","BRN50","0",2,1,"United Arab Emirates Dirham",2,"AE","+971-503128503","0992125561waleedawad@gmail.com","Al Khabaisi","AED","WALID KHALED AWAD",1,1,0,1,null,1],[19573,"AJNIHAT ALWALID TRAVEL AND TOURISM L.L.C",3931,"Dubai",1759,"","AGN18836:ajnihat.h@gmail.com"," ",null,"AGN18836","BRN50","0",2,1,"United Arab Emirates Dirham",2,"AE","+971-507264500","m.abdelfattah@wtdmcc.ae","Al Khabaisi","AED","Mohamed Abdelfattah",1,1,0,1,null,1]]');
+productDetailJson = escapeSpecialChars('[{"creationTime":null,"action":"","status":null,"approvalRemarks":null,"lastUpdatedBy":0,"siteId":0,"productName":null,"productCode":"proFlight","pageNumber":1,"maxRecordPerPage":0,"approvalBy":null,"ruleText":null,"createdBy":0,"userType":null,"productId":1,"productDesc":null,"ruleLastUpdated":null,"productAvailable":false,"approvalDate":null,"approvalStatus":null,"lastModTime":null,"approvalUserId":null,"displayRights":null},{"creationTime":null,"action":"","status":null,"approvalRemarks":null,"lastUpdatedBy":0,"siteId":0,"productName":null,"productCode":"proHotel","pageNumber":1,"maxRecordPerPage":0,"approvalBy":null,"ruleText":null,"createdBy":0,"userType":null,"productId":2,"productDesc":null,"ruleLastUpdated":null,"productAvailable":false,"approvalDate":null,"approvalStatus":null,"lastModTime":null,"approvalUserId":null,"displayRights":null},{"creationTime":null,"action":"","status":null,"approvalRemarks":null,"lastUpdatedBy":0,"siteId":0,"productName":null,"productCode":"proOther","pageNumber":1,"maxRecordPerPage":0,"approvalBy":null,"ruleText":null,"createdBy":0,"userType":null,"productId":3,"productDesc":null,"ruleLastUpdated":null,"productAvailable":false,"approvalDate":null,"approvalStatus":null,"lastModTime":null,"approvalUserId":null,"displayRights":null},{"creationTime":null,"action":"","status":null,"approvalRemarks":null,"lastUpdatedBy":0,"siteId":0,"productName":null,"productCode":"proIns","pageNumber":1,"maxRecordPerPage":0,"approvalBy":null,"ruleText":null,"createdBy":0,"userType":null,"productId":4,"productDesc":null,"ruleLastUpdated":null,"productAvailable":false,"approvalDate":null,"approvalStatus":null,"lastModTime":null,"approvalUserId":null,"displayRights":null}]');
+phoneNo = '+971-562554288';
+$(window).load(function()
+{
+    var selectedTab = "";	
+    var newImg= "";
+   if(selectedTab!=="dashboard"){
+	  $(".notify-sec").hide();
+	  $(".menubg").css("margin-left", "0em"); 
+   }else{
+	  newImg="home_whiteicon.png";
+   }
+   if(selectedTab=="flight"){
+	   newImg="Flight_orangeicon.png";
+	   $("#dashboard").removeClass("active");
+	   }
+   if(selectedTab=="hotel"){
+	   newImg="hotel_orangeicon.png"; 
+	   $("#dashboard").removeClass("active");
+   }
+   if(selectedTab=="car"){
+	   newImg="car_whiteicon.png"; 
+	   $("#dashboard").removeClass("active");
+   }
+   if(selectedTab=="flightHotel"){
+	   newImg="flight-building_icon.png"; 
+	   $("#dashboard").removeClass("active");
+   }
+   if(selectedTab=="insurance"){
+	   newImg="insurance_orangeicon.png"; 
+	   $("#dashboard").removeClass("active");
+   }
+   $("#"+selectedTab).addClass("active");
+    $("#"+selectedTab).children().children().attr('src','/odeysysportal/static/images/icons/header/'+newImg);
+    ifValid();
+    
+    var pathname = window.location.pathname;
+    if(pathname.indexOf("passengerDetail")!=-1 || pathname.indexOf("bookingConfirmation")!=-1){
+    	$("#viewCurrency").attr("disabled",true);
+    }
+    
+    if(viewCurrencyID!=""){
+    	$("#viewCurrency").val(viewCurrencyID);
+    }
+});
+function escapeSpecialChars(jsonString) {
+    return jsonString.replace("*", "\'")
+    	.replace(/\n/g, "\\n")
+        .replace(/\r/g, "\\r")
+        .replace(/\t/g, "\\t")
+        .replace(/\f/g, "\\f");
+}
+</script>
+
+				</header>
+				
+
+
+<link rel="stylesheet" href="/odeysysportal/static/css/integrated.css">
+<link type="text/css" rel="stylesheet" href="/odeysysportal/static/css/main.css" />
+<link type="text/css" rel="stylesheet" href="/odeysysportal/static/css/vendor/jquery.mCustomScrollbar.min.css" />
+<link type="text/css" rel="stylesheet" href="/odeysysportal/static/css/dashboard.css" />
+<div class="container" style="height:700px;">
+<div class="portal-error-msg">
+<h1>Sorry! Page not found.</h1>
+</div>
+</div>
+
+					
+				
+			</div>
+		
+		
+	
+
+</body>
+<script type="text/javascript">
+var idleTimer = null;
+var idleState = false;
+var idleWait = parseFloat(1800)*1000;
+var contxtPath = '/odeysysportal';
+(function ($) {
+    $(document).ready(function () {
+        $('*').bind('mousemove keydown scroll', function () {
+            clearTimeout(idleTimer);
+            if (idleState == true) { 
+                // Reactivated event
+            	 window.location.href = contxtPath+'/login/loginForm';    
+            }
+            idleState = false;
+            idleTimer = setTimeout(function () { 
+                // Idle Event
+                alert("Your session has been expired! You will be redirected to login page.");
+                idleState = true; }, idleWait);
+        });
+        $("body").trigger("mousemove");
+    });
+}) (jQuery)
+/*  $(window).on('beforeunload', function(){
+    return 'Are you sure you want to exit?';
+});
+  */
+/* window.onbeforeunload = function () {
+    return "Are you sure?";
+}
+
+$(function () {
+    $('body').click(function () {
+        window.onbeforeunload = function () {
+        };
+    });
+});
+$(window).on('unload', function(){
+    //alert("unload");
+     $.ajax({
+        type: "POST",
+        url: "../login/signOut",
+        success: function(response) {
+        },
+        error: function(e) {
+        }
+    });
+}); */
+</script>
+</html>

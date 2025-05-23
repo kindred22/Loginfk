@@ -1,0 +1,284 @@
+<!--
+   login.html\
+   Author : Chetan
+   Date : 23/8/19
+-->
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from ndceg.com/odeysysportal/login/loginForm?isCoreSystem=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 May 2025 18:07:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<title>NDC</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<link rel="shortcut icon" href="https://ndceg.com/odeysysportal/static/images/icons/favicon.ico" type="image/x-icon">
+	<link type="text/css" rel="stylesheet" href='../static/css/integrated.css'/>
+	<link type="text/css" rel="stylesheet" href='../static/css/main.css'/>
+	<link type="text/css" rel="stylesheet" href='../static/css/company.css'/>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/Detect.js/2.2.2/detect.min.js"
+			integrity="sha512-iNuMM5cmiXDvk4VCTp6UEbDwYy/dA3CFTTYKB6/V+LD62S58TQZ+sykXzhmVT1QvqHD39ZhecsPGXjZUaIuSWQ=="
+			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+			integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<script>
+
+
+	var statusMsg='';
+if(statusMsg!=""){
+	window.history.replaceState("null","null","/odeysysportal/login/loginForm");
+}
+</script>
+
+
+
+<style>
+.list-inline > li{padding: 15px;}
+#trustwaveSealImage{
+	cursor: pointer;
+    position: fixed;
+    bottom: 0;
+    margin: 15px;
+    left: 0;
+}
+</style>
+<body>
+	<div class="company-wrapper">
+		<div id="content_container" class="page">
+			<div id="content" class="">
+				<form id="loginPage" action="https://ndceg.com/odeysysportal/login/loginAction" method="post" autocomplete="off">
+					<div class="row">
+						
+						<div class="col-sm-7">
+							<div class="content-logo">
+								<img src="../static/images/logo-new.png" class="ndclogo"/>
+							</div>
+							<p class="font-14 text-center pl-5 pr-3 pad-1 mb-3">
+								( Free – easy – safe – profitable - exclusive and special fairs  - strong content include GDS , LCC , charter flights and block seats  - with 24/7 support ) <br>
+								NDC is an online sales channel B2B for Wonder travel, our goal is to develop smart technology to make booking travel services easier, save and more profitable. Wonder Travel is a leading tourism company established in 1980, our rank always between top 5 on most airlines since 2018 with impressive market share increase annually. Wonder travel is a member of the International Air Transport Association (IATA - ASTA - AFTA) <br>
+								Wonder Travel has 12 branches at the level of the Arab Republic of Egypt and aims to expand in the Arab world.</p>
+							<div class="text-center">
+								<img src="../static/images/login.png" width="330" alt="Login" />
+	   						</div>
+	
+						</div>
+
+						<div class="col-sm-4 mrgntop">
+							<div class="login-section">
+								<h3 class="text-center mar-top">AGENT LOGIN</h3>
+								<p class="sign-in-text">Sign In - with your NDC Account</p>
+								<div class="loginflds">
+									<div>
+										<input id="agencyCodeMain" name="displayUserType" placeholder="Agency Code" class="logingfld mt-5 agencycode" required="true" type="text" value="" autocomplete="off"/>
+									</div>
+									<div>
+										<input id="userAlias" name="email" placeholder="Email" class="logingfld mt-5 username" required="true" type="text" value="" autocomplete="off"/>
+									</div>
+									<div>
+										<input id="password_password" name="password" placeholder="Password" type="password" class="logingfld mt-5 password" required="true" value="" autocomplete="off"/>
+									</div>
+									<div>
+									<input id="userDeviceFingerPrint" name="userDeviceFingerPrint" type="hidden" required="true" value=""/>
+									</div>
+									<div class="pt-4 pb-3 font-sml mt-1em">
+										<div style="margin-top: -3px;"
+											class="custom-control custom-checkbox float-left">
+											<!-- <input type="checkbox" id="customCheck" name="example1" > -->
+											<input id="customCheck" name="rememberIsChecked" class="custom-control-input logingld" type="checkbox" value="true"/><input type="hidden" name="_rememberIsChecked" value="on"/> <label
+												class="custom-control-label" for="customCheck">&nbsp;</label>
+
+										</div>
+										<span class="padL">Remember Me</span> <span>
+											<a href="javascript:void(0);" style="color: grey" id="forgot-password" data-target="#forgot-password-modal" data-toggle="modal" >Forgot Password?</a>
+											<p id="timer" style="display:none;"></p></span>
+									</div>
+									<div class="pt-3 pb-3 text-center">
+										<!-- <a href="dashboard.html"><button type="button" class="btn loginbth">LOGIN</button></a> -->
+										<input type="submit" class="btn loginbth" value='LOGIN'>
+									</div>
+									</a>
+								</div>
+								
+	</form>
+
+								<div class="pt-3 pb-3 text-center font-sml">
+								
+									<span style="color: #333333;">Not a Member?</span> 
+									<span><a href="registerForm.html" class="greenlink" target="blank">Request
+											for <span >Registration</span>
+									</a></span>
+								</div> <!-- "id="resetPassErroDiv" --> 
+
+								
+								
+							
+								<div style="color: red; text-align:center;" id="errormessage"></div>
+								
+								
+							</div>
+						</div>
+					</div>
+
+					<ul class="list-inline nav-list"  style="text-align:center;">
+						<li><a href="https://ndceg.com/odeysysportal/static/html/NDCAboutus.html">About Us</a></li>
+						<li><a href="https://ndceg.com/odeysysportal/static/html/NDCMission.html">Mission</a></li>
+						<li><a href="https://ndceg.com/odeysysportal/static/html/NDCVision.html">Vision</a></li>
+						<li ><a href="https://ndceg.com/odeysysportal/static/html/NDCPolicy.html">Policy</a></li>
+						<li><a href="contactUs.html">Contact Us</a></li>
+					</ul>
+
+
+			<footer class="loginfooter" style="color:#333;position:initial;"> Copyright @ Wonder Travel, 2020. All
+		Rights Reserved. </footer>
+
+		
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+	<!-- Forgot Password Modal Window starts here -------->
+	<div class="modal fade" id="forgot-password-modal">
+	<form id="command" action="https://ndceg.com/odeysysportal/login/loginForm;jsessionid=rcJZrTibRoW6bdpKZw6nRA3uKKmdxjqCtdzBfGBo.ndc-prd-ne-portal-12-z2?isCoreSystem=true" method="post">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-orange">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">X</span>
+					</button>
+					<h4 class="modal-title">Forgot Password</h4>
+				</div>
+				<!-- modal-header -->
+				<div class="modal-body">
+					<div class="form-wrap">
+						<div class="fw" data-label="Agency Code">
+							<input placeholder="Agency Code" class="" id="agencyCode"
+								type="text" required="true"/>
+						</div>
+						<div class="fw" data-label="Email">
+							<input placeholder="Email" class="" type="email" id="emailId" required="true"/>
+						</div>
+					</div>
+					<!-- form-wrap -->
+					<div class="text-center">
+
+						<a id="send" href="javascript:void(0);" class="btn orange-btn">Submit</a>
+						<button id="processing" class="btn orange-btn"
+							style="display: none;">
+							<img src="../static/images/send.gif" />Sending...
+						</button>
+						<div style="color: red; display: none;" id="resetPassErrorDiv">Please
+							Enter Agency Code.</div>
+					</div>
+				</div>
+				<!-- modal-body -->
+				
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+</form>
+	</div>
+	<!-- #forgot-password-modal -->
+
+	<!-- Forgot Password Modal Window ends here -------->
+
+	<!-- reset password modal starts -->
+	<div class="modal fade" id="reset-password-modal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-orange">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">X</span>
+					</button>
+				</div>
+				<!-- modal-header -->
+				<div class="modal-body text-center">
+					<p class="grey-text">Reset password link is sent to your email
+					</p>
+					<div class="text-center">
+						<a href="javascript:void(0);" class="btn orange-btn"
+							data-dismiss="modal">OK</a>
+					</div>
+				</div>
+				<!-- modal-body -->
+			</div>
+			<!-- modal-content -->
+				<!-- <ul class="list-inline nav-list"  >
+						<li><a href="NDCAboutus.html">About Us</a></li>
+						<li><a href="NDCMission.html">Mission</a></li>
+						<li><a href="NDCVision.html">Vision</a></li>
+						<li ><a href="NDCPolicy.html">Policy</a></li> 
+					</ul> -->
+		</div>
+		<!-- modal-dialog -->
+	</div>
+
+	<!-- reset password modal ends -->
+
+
+	<!-- <footer class="loginfooter"> Copyright @ NDC, 2019. All
+		Rights Reserved. </footer> -->
+	</div>
+	<!-- company-wrapper -->
+	<script>
+		var RegStatusMsg = "";
+		var passworMessage="";
+		var cityJson = [];
+		var stateJson =[];
+		if(passworMessage=="Password changed successfully, please login"){
+
+			$("#errormessage").css("color","green");
+
+		}
+
+
+	</script>
+	<script type="application/javascript"
+		src="../static/js/integrated.js"></script>
+	<script type="application/javascript"
+		src="../static/js/company.js"></script>
+<script type="application/javascript"
+		src="../static/js/login.js"></script>
+		<script type="text/javascript" id="zsiqchat">
+	 var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode: "07de97db4f603764716ff96e7371a6c5eaad4fa5b1b0e215b8de2214ef5bd7c8", values:{},ready:function(){}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zoho.com/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);
+	$zoho.salesiq.ready = function(){$zoho.salesiq.customfield.add({
+	"name" :"Branch_Name","hint" :"Branch Name","required" : false,"type" :"text", "visibility" :"both"});$zoho.salesiq.customfield.add({"name" :"Company_Code", "hint" :"Company code","required" : false,"type" :"text","visibility" :"both"});}
+</script>
+
+<script type="text/javascript" src="../../../sealserver.trustwave.com/seal37a8.js?code=04bee9f0c1514e67839da32078eecbc2"></script>
+<script>
+	// Initialize the agent at application startup.
+	// If you're using an ad blocker or Brave/Firefox, this import will not work.
+	// Please use the NPM package instead: https://t.ly/ORyXk
+	const fpPromise = import('https://openfpcdn.io/fingerprintjs/v4')
+			.catch(error=>
+				// An error occurred when importing from CDN. Will import locally
+				import("../static/js/fingerprint-v4.js"))
+			.then(FingerprintJS => FingerprintJS.load())
+			.catch(error=> console.error("Error loading the FingerprintJS library: ", error));
+
+	// Get the visitor identifier when you need it.
+	fpPromise
+			.then(fp => fp.get())
+			.then(result => {
+				// This is the visitor identifier:
+				const visitorId = result.visitorId
+				$("#userDeviceFingerPrint").val(visitorId);
+			}).catch(error=> console.error("Error obtaining the visitor ID: ", error));
+</script>
+</body>
+
+
+<!-- Mirrored from ndceg.com/odeysysportal/login/loginForm?isCoreSystem=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 May 2025 18:07:38 GMT -->
+</html>
